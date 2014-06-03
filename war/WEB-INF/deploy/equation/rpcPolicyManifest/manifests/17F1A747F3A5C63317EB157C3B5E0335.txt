@@ -1,0 +1,2 @@
+serviceClass: com.hani.gwt.client.Sequare
+path: ED2D826804F9E72D5ACE6AE055230BEB.gwt.rpc
