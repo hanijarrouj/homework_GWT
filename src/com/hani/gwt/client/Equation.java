@@ -2,6 +2,11 @@ package com.hani.gwt.client;
 
 
 
+
+//import myPkg.shared.FieldVerifier;
+import com.hani.gwt.shared.FieldVerifier;
+import com.hani.gwt.client.SequareAsync;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -21,6 +26,9 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 
 
 public class Equation implements EntryPoint {
+	Double a,b,c;
+	TextBox t_a,t_b,t_c;
+	Label lbl;
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -39,14 +47,15 @@ public class Equation implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Label errorLabel = new Label();
+/*	final Label errorLabel = new Label();
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel rootPanel = RootPanel.get("nameFieldContainer");
 		
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
-		rootPanel.add(horizontalPanel);
+		rootPanel.add(horizontalPanel, 10, 10);
+		horizontalPanel.setSize("261px", "74px");
 		
 		final TextBox a = new TextBox();
 		horizontalPanel.add(a);
@@ -80,36 +89,70 @@ public class Equation implements EntryPoint {
 		
 		final Label r = new Label("...");
 		horizontalPanel.add(r);
+		rootPanel.add(horizontalPanel, 10, 10);
 		btnNewButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				final double a1=Double.valueOf( a.getText());
 				final double b1=Double.valueOf( b.getText());
 				final double c1=Double.valueOf( c.getText());
 
-				greetingService.equation(a1, b1, c1, new AsyncCallback<String>() {
+				greetingService.Seq_eq(a1, b1, c1, new AsyncCallback<String>() {
 					
 					@Override
 					public void onSuccess(String result) {
 						// TODO Auto-generated method stub
-                        r.setText(result);
+                      r.setText(result);
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+					
 					}
 				} 
 						
 						);	
 			}
 			
-		});
+		}); 
 
 
-
+*/
+t_a=new TextBox();
+t_b=new TextBox();
+t_c=new TextBox();
+lbl=new Label();
+RootPanel.get("a_box").add(t_a);
+RootPanel.get("b_box").add(t_b);
+RootPanel.get("c_box").add(t_c);
+RootPanel.get("label").add(lbl);
+Button compute_btn=new Button("Compute");
+compute_btn.addClickHandler(new ClickHandler() {
 	
+	@Override
+	public void onClick(ClickEvent event) {
+		// TODO Auto-generated method stub
+		a=Double.parseDouble(t_a.getText());
+		b=Double.parseDouble(t_a.getText());
+		c=Double.parseDouble(t_c.getText());
+		greetingService.equation(a, b, c, new AsyncCallback<String>() {
+			
+			@Override
+			public void onSuccess(String result) {
+				// TODO Auto-generated method stub
+              lbl.setText(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			
+			}
+		
+	}
+);
 
-
+}});
+RootPanel.get("btn").add(compute_btn);
 	}
 }
